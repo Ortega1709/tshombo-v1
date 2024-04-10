@@ -1,4 +1,4 @@
-package com.ortega.tshombo.features.auth.presentation.components
+package com.ortega.tshombo.feature.auth.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme

@@ -1,5 +1,6 @@
-package com.ortega.tshombo.features.auth.presentation.screens
+package com.ortega.tshombo.feature.auth.presentation.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +19,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ortega.tshombo.R
 import com.ortega.tshombo.core.common.components.MButton
-import com.ortega.tshombo.core.common.components.MOutlinedButton
 import com.ortega.tshombo.core.theme.TshomboTheme
-import com.ortega.tshombo.features.auth.presentation.components.AuthSubtitle
-import com.ortega.tshombo.features.auth.presentation.components.AuthTextField
-import com.ortega.tshombo.features.auth.presentation.components.AuthTitle
+import com.ortega.tshombo.feature.auth.presentation.component.AuthSubtitle
+import com.ortega.tshombo.feature.auth.presentation.component.AuthTextField
+import com.ortega.tshombo.feature.auth.presentation.component.AuthTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,6 +36,8 @@ fun RegisterScreen(onClickBack: () -> Unit) {
     val nameField = remember { mutableStateOf("") }
     val emailField = remember { mutableStateOf("") }
     val passwordField = remember { mutableStateOf("") }
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -54,29 +59,43 @@ fun RegisterScreen(onClickBack: () -> Unit) {
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = Modifier.height(64.dp))
-            AuthTitle(text = "Créer un compte")
+            AuthTitle(text = stringResource(id = R.string.create_account))
             Spacer(modifier = Modifier.height(16.dp))
-            AuthSubtitle(text = "Entrer des informations valides")
+            AuthSubtitle(text = stringResource(id = R.string.enter_valid_information))
             Spacer(modifier = Modifier.height(16.dp))
             AuthTextField(
-                label = "Nom",
+                label = stringResource(R.string.name),
                 value = nameField.value,
                 onValueChange = { value -> nameField.value = value },
             )
             Spacer(modifier = Modifier.height(16.dp))
             AuthTextField(
-                label = "E-mail",
+                label = stringResource(id = R.string.email),
                 value = emailField.value,
                 onValueChange = { value -> emailField.value = value },
             )
             Spacer(modifier = Modifier.height(16.dp))
             AuthTextField(
-                label = "Mot de passe",
+                label = stringResource(id = R.string.password),
                 value = passwordField.value,
                 onValueChange = { value -> passwordField.value = value },
             )
             Spacer(modifier = Modifier.height(16.dp))
-            MButton(text = "Créer un compte", onClick = {})
+            MButton(
+                text = stringResource(id = R.string.create_account),
+                onClick = {
+                    if (
+                        nameField.value.isNotEmpty() &&
+                        emailField.value.isNotEmpty() &&
+                        passwordField.value.isNotEmpty()) {
+
+                        // TODO: Logic for register
+
+                    } else {
+                        Toast.makeText(context, "All field are required", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
     }
 }
