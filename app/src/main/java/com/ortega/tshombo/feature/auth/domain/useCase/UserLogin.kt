@@ -17,8 +17,14 @@ class UserLogin @Inject constructor(private val iAuthRepository: IAuthRepository
         onError: (String) -> Unit
     ) {
         try {
-            val user = iAuthRepository.loginWithEmailAndPassword(email, password)
-            onSuccess(user)
+            val response = iAuthRepository.loginWithEmailAndPassword(email, password)
+            if (response.code() == 200) {
+               if (response.body() != null)
+                   onSuccess(response.body()!!.data)
+            } else {
+                onError("Authentication error")
+            }
+
         } catch (e: HttpException) {
             onError(e.localizedMessage ?: "An unexpected error occurred")
         } catch (e: IOException) {

@@ -1,7 +1,8 @@
 package com.ortega.tshombo.feature.auth.data.datasources.remote.request
 
 data class RegisterRequest(
-    val name: String,
+    val username: String,
     val email: String,
-    val password: String
+    val password: String,
+    val role: String = "USER"
 )

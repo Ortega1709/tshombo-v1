@@ -19,10 +19,13 @@ class UserRegister @Inject constructor(private val iAuthRepository: IAuthReposit
         onError: (String) -> Unit
     ) {
         try {
-            val user = iAuthRepository.registerWithEmailAndPassword(name, password, email)
-            onSuccess(user)
-        } catch (e: HttpException) {
-            onError(e.localizedMessage ?: "An unexpected error occurred")
+            val response = iAuthRepository.registerWithEmailAndPassword(name, password, email)
+            if (response.code() == 200) {
+              if (response.body() != null)
+                  onSuccess(response.body()!!.data)
+            } else {
+              onError("Register error")
+            }
         } catch (e: IOException) {
             onError(e.localizedMessage ?: "Couldn't reach server. Check your internet connection.")
         }

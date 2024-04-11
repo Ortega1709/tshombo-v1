@@ -7,4 +7,13 @@
     <string name="email">E-mail</string>
     <string name="password">Mot de passe</string>
     <string name="name">Nom</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="home">Accueil</string>
+    <string name="search">Recherche</string>
+    <string name="favorite">Favoris</string>
+    <string name="my_store">Mon magasin</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="find_right_phone">Trouver le téléphone qu\'il vous faut !</string>
+    <string name="notifications">Notifications</string>
 </resources>

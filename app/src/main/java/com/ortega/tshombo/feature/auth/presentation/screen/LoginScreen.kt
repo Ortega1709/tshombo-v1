@@ -12,6 +12,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,9 +32,11 @@ import com.ortega.tshombo.feature.auth.presentation.viewModel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(authViewModel: AuthViewModel, onClickCreateAccount: () -> Unit) {
-
-    val state = authViewModel.state.value
+fun LoginScreen(
+    authViewModel: AuthViewModel,
+    onClickCreateAccount: () -> Unit,
+    onLoginSuccess: () -> Unit,
+) {
 
     val emailField = remember { mutableStateOf("") }
     val passwordField = remember { mutableStateOf("") }
@@ -69,15 +73,31 @@ fun LoginScreen(authViewModel: AuthViewModel, onClickCreateAccount: () -> Unit) 
             MButton(
                 text = stringResource(R.string.login),
                 onClick = {
-                    if (emailField.value.isNotEmpty() && passwordField.value.isNotEmpty()) {
-                        authViewModel.login(emailField.value, passwordField.value)
+                    if (
+                        emailField.value.isNotEmpty() &&
+                        passwordField.value.isNotEmpty()
+                    ) {
+
+                        authViewModel.login(
+                            email = emailField.value,
+                            password = passwordField.value,
+                            loading = { },
+                            onSuccess = { onLoginSuccess() },
+                            onError = { err ->
+                                Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
+                            }
+                        )
+
                     } else {
                         Toast.makeText(context, "All field are required", Toast.LENGTH_SHORT).show()
                     }
                 }
             )
             Spacer(modifier = Modifier.height(8.dp))
-            MOutlinedButton(text = stringResource(R.string.create_account), onClick = onClickCreateAccount)
+            MOutlinedButton(
+                text = stringResource(R.string.create_account),
+                onClick = onClickCreateAccount
+            )
         }
     }
 }

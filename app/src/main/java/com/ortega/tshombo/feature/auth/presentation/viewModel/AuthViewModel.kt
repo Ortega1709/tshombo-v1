@@ -19,45 +19,58 @@ class AuthViewModel @Inject constructor(
     private val userRegister: UserRegister
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(AuthState())
-    val state: State<AuthState> = _state
+    fun login(
+        email: String,
+        password: String,
+        loading: (Boolean) -> Unit,
+        onSuccess: (UserEntity) -> Unit,
+        onError: (String) -> Unit,
+    ) {
 
-    fun login(email: String, password: String) {
-        _state.value = AuthState(isLoading = true)
+        loading(true)
 
         viewModelScope.launch {
             userLogin.invoke(
                 email = email,
                 password = password,
-                onSuccess = { _state.value = AuthState(isLoading = false, user = it) },
+                onSuccess = {
+                    loading(false)
+                    onSuccess(it)
+                },
                 onError = {
-                    _state.value = AuthState(isLoading = false, error = it)
-                    Log.d("REGISTER", it)
+                    loading(false)
+                    onError(it)
                 }
             )
         }
     }
 
-    fun register(name: String, email: String, password: String) {
-        _state.value = AuthState(isLoading = true)
+    fun register(
+        name: String,
+        email: String,
+        password: String,
+        loading: (Boolean) -> Unit,
+        onSuccess: (UserEntity) -> Unit,
+        onError: (String) -> Unit,
+    ) {
+
+        loading(true)
 
         viewModelScope.launch {
             userRegister.invoke(
                 name = name,
                 email = email,
                 password = password,
-                onSuccess = { _state.value = AuthState(isLoading = false, user = it) },
+                onSuccess = {
+                    loading(false)
+                    onSuccess(it)
+                },
                 onError = {
-                    _state.value = AuthState(isLoading = false, error = it)
+                    loading(false)
+                    onError(it)
                 }
             )
         }
     }
 
 }
-
-data class AuthState(
-    val isLoading: Boolean = false,
-    val user: UserEntity? = null,
-    val error: String = ""
-)

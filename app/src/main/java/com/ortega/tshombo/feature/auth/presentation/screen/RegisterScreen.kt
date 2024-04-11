@@ -21,18 +21,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ortega.tshombo.R
 import com.ortega.tshombo.core.common.components.MButton
-import com.ortega.tshombo.core.theme.TshomboTheme
 import com.ortega.tshombo.feature.auth.presentation.component.AuthSubtitle
 import com.ortega.tshombo.feature.auth.presentation.component.AuthTextField
 import com.ortega.tshombo.feature.auth.presentation.component.AuthTitle
+import com.ortega.tshombo.feature.auth.presentation.viewModel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterScreen(onClickBack: () -> Unit) {
+fun RegisterScreen(
+    authViewModel: AuthViewModel,
+    onClickBack: () -> Unit,
+    onRegisterSuccess: () -> Unit,
+) {
+
     val nameField = remember { mutableStateOf("") }
     val emailField = remember { mutableStateOf("") }
     val passwordField = remember { mutableStateOf("") }
@@ -87,9 +91,19 @@ fun RegisterScreen(onClickBack: () -> Unit) {
                     if (
                         nameField.value.isNotEmpty() &&
                         emailField.value.isNotEmpty() &&
-                        passwordField.value.isNotEmpty()) {
+                        passwordField.value.isNotEmpty()
+                    ) {
 
-                        // TODO: Logic for register
+                        authViewModel.register(
+                            name = nameField.value,
+                            email = emailField.value,
+                            password = passwordField.value,
+                            loading = {},
+                            onSuccess = { onRegisterSuccess() },
+                            onError = { err ->
+                                Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
+                            }
+                        )
 
                     } else {
                         Toast.makeText(context, "All field are required", Toast.LENGTH_SHORT).show()
@@ -98,12 +112,11 @@ fun RegisterScreen(onClickBack: () -> Unit) {
             )
         }
     }
-}
 
-@Preview
-@Composable
-fun RegisterScreenPreview() {
-    TshomboTheme {
-        RegisterScreen(onClickBack = {})
-    }
+
+//    if (state.error != "") {
+//        LaunchedEffect(key1 = null) {
+//            Toast.makeText(context, state.error, Toast.LENGTH_SHORT).show()
+//        }
+//    }
 }

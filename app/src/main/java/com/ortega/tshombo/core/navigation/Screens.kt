@@ -1,7 +1,12 @@
 package com.ortega.tshombo.core.navigation
 
-enum class Screens {
+enum class AuthScreens {
     LOGIN,
-    REGISTER,
-    HOME
+    REGISTER
+}
+
+enum class MainScreens {
+    HOME,
+    FAVORITE,
+    MY_STORE
 }
