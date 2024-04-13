@@ -10,3 +10,9 @@ enum class MainScreens {
     FAVORITE,
     MY_STORE
 }
+
+enum class AdminScreens {
+    MANAGE_USER,
+    MANAGE_PROMOTION,
+    MANAGE_STORE
+}

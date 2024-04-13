@@ -21,4 +21,7 @@
     <string name="news">Nouveautés</string>
     <string name="stores">Magasins</string>
     <string name="title_activity_phone">PhoneActivity</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="promotions">Promotions</string>
+    <string name="users">Utilisateurs</string>
 </resources>
