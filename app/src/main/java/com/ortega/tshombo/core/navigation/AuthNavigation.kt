@@ -7,6 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ortega.tshombo.AdminActivity
+import com.ortega.tshombo.AuthActivity
 import com.ortega.tshombo.MainActivity
 import com.ortega.tshombo.feature.auth.presentation.screen.LoginScreen
 import com.ortega.tshombo.feature.auth.presentation.screen.RegisterScreen
@@ -23,9 +25,15 @@ fun TshomboNavigation(navController: NavHostController) {
             LoginScreen(
                 authViewModel = authViewModel,
                 onLoginSuccess = {
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    context.startActivity(intent)
+                    if (it.role.name == "ADMIN") {
+                        val intent = Intent(context, AdminActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        context.startActivity(intent)
+                    } else {
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        context.startActivity(intent)
+                    }
                 },
                 onClickCreateAccount = { navController.navigate(AuthScreens.REGISTER.name) }
             )

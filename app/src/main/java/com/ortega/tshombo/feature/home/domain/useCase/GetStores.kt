@@ -8,18 +8,17 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetStores @Inject constructor(private val homeRepository: HomeRepository) {
+class GetStores @Inject constructor(private val iHomeRepository: HomeRepository) {
 
     suspend operator fun invoke(
         onSuccess: (List<StoreEntity>) -> Unit,
         onError: (String) -> Unit
     ) {
         try {
-            val response = homeRepository.getAllStores()
+            val response = iHomeRepository.getAllStores()
             if (response.code() == 200) {
                 if (response.body() != null) {
                     onSuccess(response.body()!!.data)
-                    Log.d("STORES", response.body()!!.data.toString())
                 }
             } else {
                 onError("Fetching error")

@@ -8,14 +8,14 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetPhonesByNews @Inject constructor(private val homeRepository: HomeRepository) {
+class GetPhonesByNews @Inject constructor(private val iHomeRepository: HomeRepository) {
 
     suspend operator fun invoke(
         onSuccess: (List<PhoneEntity>) -> Unit,
         onError: (String) -> Unit
     ) {
         try {
-            val response = homeRepository.getAllPhonesByNews()
+            val response = iHomeRepository.getAllPhonesByNews()
             if (response.code() == 200) {
                 if (response.body() != null) {
                     onSuccess(response.body()!!.data)

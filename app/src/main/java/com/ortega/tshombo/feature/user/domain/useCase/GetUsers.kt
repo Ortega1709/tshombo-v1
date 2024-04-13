@@ -1,29 +1,27 @@
-package com.ortega.tshombo.feature.home.domain.useCase
+package com.ortega.tshombo.feature.user.domain.useCase
 
 import android.util.Log
-import com.ortega.tshombo.feature.home.data.repository.HomeRepository
 import com.ortega.tshombo.feature.home.domain.entity.PhoneEntity
-import com.ortega.tshombo.feature.home.domain.entity.StoreEntity
+import com.ortega.tshombo.feature.user.domain.entity.UserEntity
+import com.ortega.tshombo.feature.user.domain.repository.IUserRepository
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetPhones @Inject constructor(private val iHomeRepository: HomeRepository) {
+class GetUsers @Inject constructor(private val iUserRepository: IUserRepository) {
 
     suspend operator fun invoke(
-        onSuccess: (List<PhoneEntity>) -> Unit,
+        onSuccess: (List<UserEntity>) -> Unit,
         onError: (String) -> Unit
     ) {
         try {
-            val response = iHomeRepository.getAllPhones()
+            val response = iUserRepository.getAllUsers()
             if (response.code() == 200) {
                 if (response.body() != null) {
                     onSuccess(response.body()!!.data)
-                    Log.d("GET PHONES", response.body()!!.data.toString())
                 }
             } else {
                 onError("Fetching error")
-                Log.d("GET PHONES", "Fetching error")
             }
 
         } catch (e: HttpException) {

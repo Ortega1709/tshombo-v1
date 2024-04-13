@@ -24,4 +24,15 @@
     <string name="title_activity_admin">AdminActivity</string>
     <string name="promotions">Promotions</string>
     <string name="users">Utilisateurs</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_promotion">PromotionActivity</string>
+    <string name="title_activity_store">StoreActivity</string>
+    <string name="add_promotion">Ajouter une promotion</string>
+    <string name="add">Ajouter</string>
+    <string name="add_store">Ajouter un magasin</string>
+    <string name="add_user">Ajouter un utilisateur</string>
+    <string name="description">Description</string>
+    <string name="end_date">Date de fin</string>
+    <string name="user_type">Type d\'utilisateur</string>
+    <string name="no_content">No content</string>
 </resources>

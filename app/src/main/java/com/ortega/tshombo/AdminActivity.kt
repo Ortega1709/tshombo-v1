@@ -1,3 +1,4 @@
+
 package com.ortega.tshombo
 
 import android.annotation.SuppressLint
@@ -37,7 +38,9 @@ import com.ortega.tshombo.core.navigation.MainNavigation
 import com.ortega.tshombo.core.navigation.MainScreens
 import com.ortega.tshombo.core.theme.TshomboTheme
 import com.ortega.tshombo.core.theme.White
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AdminActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +60,6 @@ class AdminActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AdminScreen(navController: NavHostController) {
-
-
-    val context = LocalContext.current
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route

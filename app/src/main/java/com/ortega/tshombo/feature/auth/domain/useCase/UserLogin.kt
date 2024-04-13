@@ -1,5 +1,6 @@
 package com.ortega.tshombo.feature.auth.domain.useCase
 
+import android.util.Log
 import com.ortega.tshombo.feature.auth.domain.entity.UserEntity
 import com.ortega.tshombo.feature.auth.domain.repository.IAuthRepository
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +20,10 @@ class UserLogin @Inject constructor(private val iAuthRepository: IAuthRepository
         try {
             val response = iAuthRepository.loginWithEmailAndPassword(email, password)
             if (response.code() == 200) {
-               if (response.body() != null)
+               if (response.body() != null) {
+                   Log.d("USER LOGIN", response.body()!!.data.toString())
                    onSuccess(response.body()!!.data)
+               }
             } else {
                 onError("Authentication error")
             }

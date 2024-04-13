@@ -25,6 +25,7 @@ import com.ortega.tshombo.R
 import com.ortega.tshombo.core.common.components.MButton
 import com.ortega.tshombo.core.common.components.MOutlinedButton
 import com.ortega.tshombo.core.theme.TshomboTheme
+import com.ortega.tshombo.feature.auth.domain.entity.UserEntity
 import com.ortega.tshombo.feature.auth.presentation.component.AuthSubtitle
 import com.ortega.tshombo.feature.auth.presentation.component.AuthTextField
 import com.ortega.tshombo.feature.auth.presentation.component.AuthTitle
@@ -35,7 +36,7 @@ import com.ortega.tshombo.feature.auth.presentation.viewModel.AuthViewModel
 fun LoginScreen(
     authViewModel: AuthViewModel,
     onClickCreateAccount: () -> Unit,
-    onLoginSuccess: () -> Unit,
+    onLoginSuccess: (UserEntity) -> Unit,
 ) {
 
     val emailField = remember { mutableStateOf("") }
@@ -82,7 +83,7 @@ fun LoginScreen(
                             email = emailField.value,
                             password = passwordField.value,
                             loading = { },
-                            onSuccess = { onLoginSuccess() },
+                            onSuccess = { userEntity ->  onLoginSuccess(userEntity) },
                             onError = { err ->
                                 Toast.makeText(context, err, Toast.LENGTH_SHORT).show()
                             }
