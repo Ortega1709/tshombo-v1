@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Favorite
@@ -95,6 +97,7 @@ fun MainScreen(navController: NavHostController) {
                     },
                 )
                 NavigationBarItem(
+                    colors = mNavigationBarItemColors(),
                     selected = false,
                     label = { MText(text = stringResource(R.string.search)) },
                     onClick = {
@@ -155,6 +158,10 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     ) {
-        MainNavigation(navController = navController)
+        Column (
+            modifier = Modifier.padding(paddingValues = it)
+        ) {
+            MainNavigation(navController = navController)
+        }
     }
 }

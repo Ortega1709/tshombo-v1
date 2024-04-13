@@ -16,4 +16,9 @@
     <string name="title_activity_notification">NotificationActivity</string>
     <string name="find_right_phone">Trouver le téléphone qu\'il vous faut !</string>
     <string name="notifications">Notifications</string>
+    <string name="see_more">Voir plus</string>
+    <string name="recommanded">Recommandés</string>
+    <string name="news">Nouveautés</string>
+    <string name="stores">Magasins</string>
+    <string name="title_activity_phone">PhoneActivity</string>
 </resources>
