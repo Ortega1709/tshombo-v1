@@ -15,9 +15,14 @@ import com.ortega.tshombo.core.common.components.Item
 import com.ortega.tshombo.core.common.components.Loading
 import com.ortega.tshombo.core.common.components.MText
 import com.ortega.tshombo.feature.user.presentation.state.UsersUiState
+import com.ortega.tshombo.feature.user.presentation.viewModel.UserViewModel
 
 @Composable
-fun BodySection(usersUiState: UsersUiState, paddingValues: PaddingValues) =
+fun BodySection(
+    usersUiState: UsersUiState,
+    paddingValues: PaddingValues,
+    userViewModel: UserViewModel
+) =
     if (usersUiState.loading) Loading(paddingValues = paddingValues)
     else {
         if (usersUiState.users.isEmpty()) Empty(paddingValues = paddingValues)
@@ -35,7 +40,7 @@ fun BodySection(usersUiState: UsersUiState, paddingValues: PaddingValues) =
                         leadingContent = {},
                         headlineContent = { MText(text = it.email) },
                         supportingContent = { MText(text = it.username) },
-                        onClickDelete = {},
+                        onClickDelete = { userViewModel.deleteUserById(it.userId) },
                         onClickUpdate = null
                     )
                     Spacer(modifier = Modifier.height(8.dp))

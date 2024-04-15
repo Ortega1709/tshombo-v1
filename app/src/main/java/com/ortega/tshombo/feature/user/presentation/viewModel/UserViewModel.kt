@@ -7,6 +7,7 @@ import com.ortega.tshombo.core.utils.Resource
 import com.ortega.tshombo.feature.user.domain.entity.UserEntity
 import com.ortega.tshombo.feature.user.domain.request.UserRequest
 import com.ortega.tshombo.feature.user.domain.useCase.AddUser
+import com.ortega.tshombo.feature.user.domain.useCase.DeleteUser
 import com.ortega.tshombo.feature.user.domain.useCase.GetUsers
 import com.ortega.tshombo.feature.user.presentation.state.UsersUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,13 +17,16 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val getUsers: GetUsers,
-    private val addUser: AddUser
+    private val addUser: AddUser,
+    private val deleteUser: DeleteUser
 ) : ViewModel() {
 
     private var _usersUiState = mutableStateOf(UsersUiState())
     val usersUiState = _usersUiState
 
-    init { getAllUsers() }
+    init {
+        getAllUsers()
+    }
 
     fun addUser(
         userRequest: UserRequest,
@@ -35,12 +39,12 @@ class UserViewModel @Inject constructor(
             addUser.invoke(
                 userRequest = userRequest,
                 onSuccess = {
-                   loading(false)
-                   onSuccess()
+                    loading(false)
+                    onSuccess()
                 },
                 onError = {
-                   loading(false)
-                   onError(it)
+                    loading(false)
+                    onError(it)
                 }
             )
         }
@@ -60,6 +64,24 @@ class UserViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    fun deleteUserById(userId: Int) {
+
+        _usersUiState.value = _usersUiState.value.copy(loading = true)
+
+        viewModelScope.launch {
+            deleteUser.invoke(
+                userId = userId,
+                onSuccess = {
+                    getAllUsers()
+                },
+                onError = {
+                    getAllUsers()
+                }
+            )
+        }
+
     }
 
 }

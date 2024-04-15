@@ -55,6 +55,10 @@ fun UserScreen(userViewModel: UserViewModel = hiltViewModel(), onClickAdd: () ->
             AddFloatingButton { onClickAdd() }
         }
     ) { paddingValues ->
-        BodySection(usersUiState = usersUiState, paddingValues = paddingValues)
+        BodySection(
+            usersUiState = usersUiState,
+            paddingValues = paddingValues,
+            userViewModel = userViewModel
+        )
     }
 }
