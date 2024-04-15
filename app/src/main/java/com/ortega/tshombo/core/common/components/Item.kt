@@ -28,10 +28,13 @@ fun Item(
     leadingContent: @Composable() (() -> Unit)?,
     headlineContent: @Composable () -> Unit,
     supportingContent: @Composable() (() -> Unit)?,
-    onClickUpdate: () -> Unit,
+    onClickUpdate: (() -> Unit)?,
     onClickDelete: () -> Unit,
     iconSize: Dp = 30.dp
 ) {
+
+
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
@@ -46,14 +49,16 @@ fun Item(
             colors = ListItemDefaults.colors(containerColor = White),
             trailingContent = {
                 Row {
-                    IconButton(
-                        modifier = Modifier.size(iconSize),
-                        onClick = onClickUpdate,
-                        colors = mIconButtonColors()
-                    ) {
-                        Icon(imageVector = Icons.Rounded.Edit, contentDescription = null)
+                    if (onClickUpdate != null) {
+                        IconButton(
+                            modifier = Modifier.size(iconSize),
+                            onClick = onClickUpdate,
+                            colors = mIconButtonColors()
+                        ) {
+                            Icon(imageVector = Icons.Rounded.Edit, contentDescription = null)
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
                     }
-                    Spacer(modifier = Modifier.width(16.dp))
                     IconButton(
                         modifier = Modifier.size(iconSize),
                         onClick = onClickDelete,

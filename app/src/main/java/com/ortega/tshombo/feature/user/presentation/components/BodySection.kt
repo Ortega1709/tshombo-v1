@@ -35,14 +35,14 @@ fun BodySection(usersUiState: UsersUiState, paddingValues: PaddingValues) =
                         leadingContent = {},
                         headlineContent = { MText(text = it.email) },
                         supportingContent = { MText(text = it.username) },
-                        onClickUpdate = {},
-                        onClickDelete = {}
+                        onClickDelete = {},
+                        onClickUpdate = null
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
                 item {
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(70.dp))
                 }
             }
         }

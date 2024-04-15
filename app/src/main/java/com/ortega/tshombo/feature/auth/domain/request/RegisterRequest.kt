@@ -1,4 +1,4 @@
-package com.ortega.tshombo.feature.auth.data.datasources.remote.request
+package com.ortega.tshombo.feature.auth.domain.request
 
 data class RegisterRequest(
     val username: String,

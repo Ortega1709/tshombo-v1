@@ -47,9 +47,7 @@ fun AddStoreScreen(onClickBack:() -> Unit) {
                     )
                 },
                 actions = {
-                    MTextButton(text = stringResource(id = R.string.add)) {
-
-                    }
+                    MTextButton(text = stringResource(id = R.string.add), onClick = {})
                 }
             )
         }

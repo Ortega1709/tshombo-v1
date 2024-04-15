@@ -2,8 +2,8 @@ package com.ortega.tshombo.feature.auth.data.repository
 
 import com.ortega.tshombo.core.common.response.Res
 import com.ortega.tshombo.feature.auth.data.datasources.remote.AuthRemoteDataSource
-import com.ortega.tshombo.feature.auth.data.datasources.remote.request.LoginRequest
-import com.ortega.tshombo.feature.auth.data.datasources.remote.request.RegisterRequest
+import com.ortega.tshombo.feature.auth.domain.request.LoginRequest
+import com.ortega.tshombo.feature.auth.domain.request.RegisterRequest
 import com.ortega.tshombo.feature.auth.domain.entity.UserEntity
 import com.ortega.tshombo.feature.auth.domain.repository.IAuthRepository
 import javax.inject.Inject
