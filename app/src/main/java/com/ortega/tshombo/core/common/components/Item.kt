@@ -1,5 +1,6 @@
 package com.ortega.tshombo.core.common.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import com.ortega.tshombo.core.theme.White
 
 @Composable
 fun Item(
+    onClick: () -> Unit,
     overlineContent: @Composable() (() -> Unit)?,
     leadingContent: @Composable() (() -> Unit)?,
     headlineContent: @Composable () -> Unit,
@@ -36,12 +38,14 @@ fun Item(
 
 
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         color = White
     ) {
 
         ListItem(
+            modifier = Modifier.clickable { onClick() },
             overlineContent = overlineContent,
             leadingContent = leadingContent,
             headlineContent = headlineContent,

@@ -9,16 +9,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ortega.tshombo.R
 import com.ortega.tshombo.core.common.components.AddFloatingButton
 import com.ortega.tshombo.core.common.components.MText
+import com.ortega.tshombo.feature.store.presentation.components.BodySection
+import com.ortega.tshombo.feature.store.presentation.viewModel.StoreViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StoreScreen(onClickAdd: () -> Unit) {
+fun StoreScreen(storeViewModel: StoreViewModel = hiltViewModel(), onClickAdd: () -> Unit) {
+    val storesUiState by storeViewModel.storesUiState
+
     Scaffold(
         topBar = {
             MediumTopAppBar(
@@ -34,6 +40,10 @@ fun StoreScreen(onClickAdd: () -> Unit) {
             AddFloatingButton { onClickAdd() }
         }
     ) {
-
+        BodySection(
+            storesUiState = storesUiState,
+            paddingValues = it,
+            storeViewModel = storeViewModel
+        )
     }
 }

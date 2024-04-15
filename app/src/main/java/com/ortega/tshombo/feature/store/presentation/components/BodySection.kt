@@ -1,4 +1,4 @@
-package com.ortega.tshombo.feature.user.presentation.components
+package com.ortega.tshombo.feature.store.presentation.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -14,18 +14,20 @@ import com.ortega.tshombo.core.common.components.Empty
 import com.ortega.tshombo.core.common.components.Item
 import com.ortega.tshombo.core.common.components.Loading
 import com.ortega.tshombo.core.common.components.MText
+import com.ortega.tshombo.feature.store.presentation.state.StoresUiState
+import com.ortega.tshombo.feature.store.presentation.viewModel.StoreViewModel
 import com.ortega.tshombo.feature.user.presentation.state.UsersUiState
 import com.ortega.tshombo.feature.user.presentation.viewModel.UserViewModel
 
 @Composable
 fun BodySection(
-    usersUiState: UsersUiState,
+    storesUiState: StoresUiState,
     paddingValues: PaddingValues,
-    userViewModel: UserViewModel
+    storeViewModel: StoreViewModel
 ) =
-    if (usersUiState.loading) Loading(paddingValues = paddingValues)
+    if (storesUiState.loading) Loading(paddingValues = paddingValues)
     else {
-        if (usersUiState.users.isEmpty()) Empty(paddingValues = paddingValues)
+        if (storesUiState.users.isEmpty()) Empty(paddingValues = paddingValues)
         else {
             LazyColumn(
                 modifier = Modifier
@@ -34,13 +36,13 @@ fun BodySection(
                     .padding(horizontal = 16.dp)
             ) {
                 item { Spacer(modifier = Modifier.height(16.dp)) }
-                items(usersUiState.users) {
+                items(storesUiState.users) {
                     Item(
-                        overlineContent = { MText(text = it.role.name) },
+                        overlineContent = { MText(text = it.city) },
                         leadingContent = {  },
-                        headlineContent = { MText(text = it.email) },
-                        supportingContent = { MText(text = it.username) },
-                        onClickDelete = { userViewModel.deleteUserById(it.userId) },
+                        headlineContent = { MText(text = it.name) },
+                        supportingContent = { MText(text = "${it.commune}/${it.avenue}") },
+                        onClickDelete = { storeViewModel.deleteByStoreId(it.storeId) },
                         onClickUpdate = null,
                         onClick = {}
                     )

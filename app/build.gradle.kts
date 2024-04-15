@@ -84,6 +84,7 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:1.4.0")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.5")
+    // implementation("androidx.compose.material:material-icons-extended")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
