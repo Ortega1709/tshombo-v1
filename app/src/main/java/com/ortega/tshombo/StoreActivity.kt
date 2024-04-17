@@ -21,7 +21,9 @@ class StoreActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AddStoreScreen { finish() }
+
+                    val userId = intent.getIntExtra("userId", 0)
+                    AddStoreScreen(userId = userId) { finish() }
                 }
             }
         }

@@ -3,9 +3,11 @@ package com.ortega.tshombo.feature.store.presentation.screens
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -34,11 +36,13 @@ fun StoreScreen(storeViewModel: StoreViewModel = hiltViewModel(), onClickAdd: ()
                         fontWeight = FontWeight.Bold,
                     )
                 },
+                actions = {
+                    IconButton(onClick = { storeViewModel.getAllStores() }) {
+                        Icon(imageVector = Icons.Rounded.Refresh, contentDescription = null)
+                    }
+                }
             )
         },
-        floatingActionButton = {
-            AddFloatingButton { onClickAdd() }
-        }
     ) {
         BodySection(
             storesUiState = storesUiState,

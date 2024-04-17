@@ -35,4 +35,10 @@
     <string name="end_date">Date de fin</string>
     <string name="user_type">Type d\'utilisateur</string>
     <string name="no_content">No content</string>
+    <string name="city">Ville</string>
+    <string name="avenue">Avenue</string>
+    <string name="commune">Commune</string>
+    <string name="rccm">Rccm</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
 </resources>

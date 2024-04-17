@@ -38,10 +38,12 @@
             android:exported="true"
             android:label="@string/title_activity_admin"
             android:theme="@style/Theme.Tshombo">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".PhoneActivity"

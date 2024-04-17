@@ -1,5 +1,6 @@
 package com.ortega.tshombo.feature.user.presentation.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +10,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.ortega.tshombo.StoreActivity
 import com.ortega.tshombo.core.common.components.Empty
 import com.ortega.tshombo.core.common.components.Item
 import com.ortega.tshombo.core.common.components.Loading
@@ -22,7 +25,11 @@ fun BodySection(
     usersUiState: UsersUiState,
     paddingValues: PaddingValues,
     userViewModel: UserViewModel
-) =
+) {
+
+    // context
+    val context = LocalContext.current
+
     if (usersUiState.loading) Loading(paddingValues = paddingValues)
     else {
         if (usersUiState.users.isEmpty()) Empty(paddingValues = paddingValues)
@@ -42,7 +49,13 @@ fun BodySection(
                         supportingContent = { MText(text = it.username) },
                         onClickDelete = { userViewModel.deleteUserById(it.userId) },
                         onClickUpdate = null,
-                        onClick = {}
+                        onClick = {
+                            if (it.role.name == "USER") {
+                                val intent = Intent(context, StoreActivity::class.java)
+                                intent.putExtra("userId", it.userId)
+                                context.startActivity(intent)
+                            }
+                        }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
@@ -53,3 +66,5 @@ fun BodySection(
             }
         }
     }
+
+}

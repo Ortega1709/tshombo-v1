@@ -20,7 +20,7 @@ class UserRegister @Inject constructor(private val iAuthRepository: IAuthReposit
     ) {
         try {
             val response = iAuthRepository.registerWithEmailAndPassword(name, password, email)
-            if (response.code() == 200) {
+            if (response.code() == 201) {
               if (response.body() != null)
                   onSuccess(response.body()!!.data)
             } else {
