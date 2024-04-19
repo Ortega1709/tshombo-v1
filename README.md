@@ -29,6 +29,3 @@ Cette application mobile, développée en Kotlin Jetpack Compose et consommant u
 - Offre une expérience utilisateur intuitive et conviviale.
 - Permet aux vendeurs de gérer efficacement leurs magasins et leurs téléphones à vendre.
 - Donne aux administrateurs un contrôle complet sur les données et les fonctionnalités de l'application.
-## Conclusion
-
-Cette application mobile constitue un outil précieux pour les clients, les vendeurs et les administrateurs dans le domaine de la vente de téléphones portables. Sa conception moderne, ses fonctionnalités complètes et sa facilité d'utilisation en font un atout indispensable pour tous les acteurs impliqués dans ce secteur.
