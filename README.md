@@ -17,7 +17,7 @@ Gestion des téléphones: Les vendeurs peuvent ajouter, modifier et supprimer de
 Réception des demandes des clients: Les vendeurs reçoivent des notifications lorsqu'un client s'intéresse à un de leurs téléphones et peuvent contacter le client directement via l'application.
 Fonctionnalités Administrateur
 
-- Gestion complète des données:## Les administrateurs ont un accès complet à toutes les données de l'application, y compris les informations des clients, les magasins et les téléphones.
+- Gestion complète des données: Les administrateurs ont un accès complet à toutes les données de l'application, y compris les informations des clients, les magasins et les téléphones.
 Ajout de magasins: Les administrateurs peuvent ajouter de nouveaux magasins à l'application en vérifiant les informations et en approuvant leur inscription.
 Ajout de promotions: Les administrateurs peuvent créer et gérer des promotions sur des téléphones spécifiques, attirant ainsi l'attention des clients et stimulant les ventes.
 Technologies Utilisées
