@@ -41,4 +41,13 @@
     <string name="rccm">Rccm</string>
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
+    <string name="dont_have_store">Vous n\'avez pas de magasin</string>
+    <string name="title_activity_add_phone">AddPhoneActivity</string>
+    <string name="phones">Téléphone(s)</string>
+    <string name="location">Localisation</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="store">Magasin</string>
+    <string name="brand">Marque</string>
+    <string name="price">Prix</string>
+    <string name="retry">Réessayer</string>
 </resources>

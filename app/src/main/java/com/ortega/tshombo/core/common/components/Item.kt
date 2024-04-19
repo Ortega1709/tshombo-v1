@@ -31,7 +31,7 @@ fun Item(
     headlineContent: @Composable () -> Unit,
     supportingContent: @Composable() (() -> Unit)?,
     onClickUpdate: (() -> Unit)?,
-    onClickDelete: () -> Unit,
+    onClickDelete: (() -> Unit)?,
     iconSize: Dp = 30.dp
 ) {
 
@@ -63,12 +63,14 @@ fun Item(
                         }
                         Spacer(modifier = Modifier.width(8.dp))
                     }
-                    IconButton(
-                        modifier = Modifier.size(iconSize),
-                        onClick = onClickDelete,
-                        colors = mIconButtonColors()
-                    ) {
-                        Icon(imageVector = Icons.Rounded.Delete, contentDescription = null)
+                    if (onClickDelete != null) {
+                        IconButton(
+                            modifier = Modifier.size(iconSize),
+                            onClick = onClickDelete,
+                            colors = mIconButtonColors()
+                        ) {
+                            Icon(imageVector = Icons.Rounded.Delete, contentDescription = null)
+                        }
                     }
                 }
 

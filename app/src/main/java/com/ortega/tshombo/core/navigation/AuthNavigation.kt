@@ -1,5 +1,6 @@
 package com.ortega.tshombo.core.navigation
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -7,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.ortega.tshombo.AdminActivity
 import com.ortega.tshombo.AuthActivity
 import com.ortega.tshombo.MainActivity
@@ -43,9 +45,7 @@ fun TshomboNavigation(navController: NavHostController) {
             RegisterScreen(
                 authViewModel = authViewModel,
                 onRegisterSuccess = {
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    context.startActivity(intent)
+                    navController.popBackStack()
                 },
                 onClickBack = { navController.popBackStack() }
             )

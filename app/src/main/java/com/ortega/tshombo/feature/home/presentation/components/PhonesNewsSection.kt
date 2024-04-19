@@ -25,8 +25,8 @@ fun PhonesNewsSection(phonesNewsUiState: PhonesNewsUiState) {
     } else {
         LazyRow {
             item { Spacer(modifier = Modifier.width(16.dp)) }
-            items(phonesNewsUiState.phones) {
-                PhoneCard(phones = it)
+            items(phonesNewsUiState.phones!!) {
+                PhoneCard(phone = it)
                 Spacer(modifier = Modifier.width(16.dp))
             }
         }

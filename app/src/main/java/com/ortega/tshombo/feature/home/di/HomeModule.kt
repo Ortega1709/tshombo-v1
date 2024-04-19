@@ -1,7 +1,6 @@
 package com.ortega.tshombo.feature.home.di
 
 import com.ortega.tshombo.core.secret.AppSecret
-import com.ortega.tshombo.feature.auth.data.datasources.remote.AuthRemoteDataSource
 import com.ortega.tshombo.feature.home.data.datasources.remote.HomeRemoteDataSource
 import com.ortega.tshombo.feature.home.data.repository.HomeRepository
 import com.ortega.tshombo.feature.home.domain.repository.IHomeRepository

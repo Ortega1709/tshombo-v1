@@ -13,6 +13,7 @@ import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material.icons.rounded.Store
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -150,7 +151,7 @@ fun MainScreen(navController: NavHostController) {
                     },
                     icon = {
                         Icon(
-                            imageVector = Icons.Rounded.AccountCircle,
+                            imageVector = Icons.Rounded.Store,
                             contentDescription = null
                         )
                     },

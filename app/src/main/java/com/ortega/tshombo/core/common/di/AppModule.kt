@@ -1,9 +1,12 @@
 package com.ortega.tshombo.core.common.di
 
+import android.content.Context
 import com.ortega.tshombo.core.secret.AppSecret
+import com.ortega.tshombo.core.utils.PreferencesManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -25,6 +28,12 @@ object AppModule {
                 }
             )
         }.build()
+    }
+
+    @Provides
+    @Singleton
+    fun providePreferencesManager(@ApplicationContext context: Context): PreferencesManager {
+        return PreferencesManager(context)
     }
 
 }

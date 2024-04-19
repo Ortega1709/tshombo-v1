@@ -21,7 +21,8 @@ class PromotionActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AddPromotionScreen { finish() }
+                    val storeId = intent.getIntExtra("storeId", 0)
+                    AddPromotionScreen(storeId = storeId) { finish() }
                 }
             }
         }

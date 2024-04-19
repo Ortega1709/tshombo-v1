@@ -7,6 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ortega.tshombo.AuthActivity
+import com.ortega.tshombo.MainActivity
 import com.ortega.tshombo.PromotionActivity
 import com.ortega.tshombo.StoreActivity
 import com.ortega.tshombo.UserActivity
@@ -29,6 +31,11 @@ fun AdminNavigation(navController: NavHostController) {
                     val intent = Intent(context, UserActivity::class.java)
                     context.startActivity(intent)
                 },
+                onClickLogout = {
+                    val intent = Intent(context, AuthActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
+                }
             )
         }
         composable(route = AdminScreens.MANAGE_PROMOTION.name) {

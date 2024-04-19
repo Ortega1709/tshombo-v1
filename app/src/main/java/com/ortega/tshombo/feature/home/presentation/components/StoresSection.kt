@@ -24,7 +24,7 @@ fun StoresSection(storesUiState: StoresUiState) {
     } else {
         LazyRow {
             item { Spacer(modifier = Modifier.width(16.dp)) }
-            items(storesUiState.stores) {
+            items(storesUiState.stores!!) {
                 StoreCard(store = it)
                 Spacer(modifier = Modifier.width(16.dp))
             }

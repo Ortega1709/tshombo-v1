@@ -20,6 +20,9 @@ class HomeViewModel @Inject constructor(
     private val getStores: GetStores
 ) : ViewModel() {
 
+    private var _globalLoading = mutableStateOf(false)
+    val globalLoading = _globalLoading
+
     private var _phonesUiState = mutableStateOf(PhonesUiState())
     val phonesUiState = _phonesUiState
 
@@ -31,12 +34,22 @@ class HomeViewModel @Inject constructor(
 
 
     init {
-        getStores()
-        getPhones()
-        getPhonesByNews()
+        fetchAll()
     }
 
-    fun getStores() {
+    fun fetchAll() {
+        globalLoading.value = true
+        viewModelScope.launch {
+
+            getStores()
+            getPhones()
+            getPhonesByNews()
+
+            globalLoading.value = false
+        }
+    }
+
+    private fun getStores() {
 
         _storesUiState.value = _storesUiState.value.copy(loading = true)
 
@@ -52,7 +65,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getPhonesByNews() {
+    private fun getPhonesByNews() {
 
         _phonesNewsUiState.value = _phonesNewsUiState.value.copy(loading = true)
         viewModelScope.launch {
@@ -69,7 +82,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getPhones() {
+    private fun getPhones() {
 
         _phonesUiState.value = _phonesUiState.value.copy(loading = true)
         viewModelScope.launch {

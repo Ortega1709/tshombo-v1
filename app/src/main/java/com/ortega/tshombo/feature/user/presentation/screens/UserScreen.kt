@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Login
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -26,12 +27,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ortega.tshombo.R
 import com.ortega.tshombo.core.common.components.AddFloatingButton
 import com.ortega.tshombo.core.common.components.MText
+import com.ortega.tshombo.feature.auth.presentation.viewModel.AuthViewModel
 import com.ortega.tshombo.feature.user.presentation.components.BodySection
 import com.ortega.tshombo.feature.user.presentation.viewModel.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserScreen(userViewModel: UserViewModel = hiltViewModel(), onClickAdd: () -> Unit) {
+fun UserScreen(
+    userViewModel: UserViewModel = hiltViewModel(),
+    authViewModel: AuthViewModel = hiltViewModel(),
+    onClickAdd: () -> Unit,
+    onClickLogout: () -> Unit
+) {
 
     val usersUiState by userViewModel.usersUiState
 
@@ -43,6 +50,15 @@ fun UserScreen(userViewModel: UserViewModel = hiltViewModel(), onClickAdd: () ->
                         text = stringResource(R.string.users),
                         fontWeight = FontWeight.Bold,
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        authViewModel.logout {
+                            onClickLogout()
+                        }
+                    }) {
+                        Icon(imageVector = Icons.Rounded.Login, contentDescription = null)
+                    }
                 },
                 actions = {
                     IconButton(onClick = { userViewModel.getAllUsers() }) {

@@ -12,61 +12,58 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.ortega.tshombo.PhoneActivity
+import com.ortega.tshombo.core.common.components.MText
+import com.ortega.tshombo.core.secret.AppSecret
 import com.ortega.tshombo.core.theme.DarkGray
 import com.ortega.tshombo.feature.home.domain.entity.PhoneEntity
 import com.ortega.tshombo.feature.home.domain.useCase.GetPhones
 
 
 @Composable
-fun PhoneCard(phones: PhoneEntity) {
+fun PhoneCard(phone: PhoneEntity) {
 
     val context = LocalContext.current
+    val link = AppSecret.IMAGE_ENDPOINT + phone.image
 
-    Column (
+    Column(
         modifier = Modifier
             .padding(end = 12.dp)
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp))
             .clickable {
                 val intent = Intent(context, PhoneActivity::class.java)
+                intent.putExtra("phoneId", phone.phoneId)
                 context.startActivity(intent)
             }
     ) {
-        Surface (
+
+        AsyncImage(
             modifier = Modifier
                 .width(200.dp)
-                .height(150.dp),
-            shape = RoundedCornerShape(12.dp),
-            color = DarkGray
-        ) {
-
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Surface (
-            modifier = Modifier
-                .width(150.dp)
-                .height(10.dp),
-            shape = RoundedCornerShape(12.dp),
-            color = DarkGray
-        ) {
-
-        }
+                .height(150.dp)
+                .clip(RoundedCornerShape(12.dp)),
+            model = link,
+            contentDescription = phone.brand,
+            contentScale = ContentScale.Crop,
+        )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Surface (
-            modifier = Modifier
-                .width(100.dp)
-                .height(10.dp),
-            shape = RoundedCornerShape(12.dp),
-            color = DarkGray
-        ) {
+        MText(text = phone.brand)
 
-        }
+        Spacer(modifier = Modifier.height(4.dp))
+
+        MText(
+            text = phone.price.toString() + " CDF",
+            fontWeight = FontWeight.Bold,
+            fontSize = 14.sp
+        )
     }
 }
 
@@ -75,7 +72,7 @@ fun PhoneCard() {
 
     val context = LocalContext.current
 
-    Column (
+    Column(
         modifier = Modifier
             .padding(end = 12.dp)
             .clip(RoundedCornerShape(12.dp))
@@ -84,7 +81,7 @@ fun PhoneCard() {
                 context.startActivity(intent)
             }
     ) {
-        Surface (
+        Surface(
             modifier = Modifier
                 .width(200.dp)
                 .height(150.dp),
@@ -96,7 +93,7 @@ fun PhoneCard() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Surface (
+        Surface(
             modifier = Modifier
                 .width(150.dp)
                 .height(10.dp),
@@ -106,9 +103,9 @@ fun PhoneCard() {
 
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
-        Surface (
+        Surface(
             modifier = Modifier
                 .width(100.dp)
                 .height(10.dp),

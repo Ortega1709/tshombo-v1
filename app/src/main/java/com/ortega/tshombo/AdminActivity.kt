@@ -15,6 +15,7 @@ import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.PictureInPicture
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -109,7 +110,7 @@ fun AdminScreen(navController: NavHostController) {
                     },
                     icon = {
                         Icon(
-                            imageVector = Icons.Rounded.Menu,
+                            imageVector = Icons.Rounded.PictureInPicture,
                             contentDescription = null
                         )
                     },

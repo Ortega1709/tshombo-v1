@@ -1,5 +1,6 @@
 package com.ortega.tshombo.feature.store.presentation.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +10,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.ortega.tshombo.PromotionActivity
+import com.ortega.tshombo.StoreActivity
 import com.ortega.tshombo.core.common.components.Empty
 import com.ortega.tshombo.core.common.components.Item
 import com.ortega.tshombo.core.common.components.Loading
@@ -24,7 +28,10 @@ fun BodySection(
     storesUiState: StoresUiState,
     paddingValues: PaddingValues,
     storeViewModel: StoreViewModel
-) =
+) {
+
+    val context = LocalContext.current
+
     if (storesUiState.loading) Loading(paddingValues = paddingValues)
     else {
         if (storesUiState.users.isEmpty()) Empty(paddingValues = paddingValues)
@@ -39,12 +46,16 @@ fun BodySection(
                 items(storesUiState.users) {
                     Item(
                         overlineContent = { MText(text = it.city) },
-                        leadingContent = {  },
+                        leadingContent = { },
                         headlineContent = { MText(text = it.name) },
                         supportingContent = { MText(text = "${it.commune}/${it.avenue}") },
-                        onClickDelete = { storeViewModel.deleteByStoreId(it.storeId) },
+                        onClickDelete = null,
                         onClickUpdate = null,
-                        onClick = {}
+                        onClick = {
+                            val intent = Intent(context, PromotionActivity::class.java)
+                            intent.putExtra("storeId", it.storeId)
+                            context.startActivity(intent)
+                        }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
@@ -55,3 +66,4 @@ fun BodySection(
             }
         }
     }
+}

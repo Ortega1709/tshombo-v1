@@ -17,22 +17,44 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import com.ortega.tshombo.core.common.components.ErrorFound
+import com.ortega.tshombo.core.common.components.Loading
 import com.ortega.tshombo.core.common.components.NavigationIconButton
 import com.ortega.tshombo.core.theme.DarkGray
 import com.ortega.tshombo.core.theme.White
+import com.ortega.tshombo.feature.phone.presentation.viewModel.PhoneViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhoneScreen(onClickBack: () -> Unit) {
+fun PhoneScreen(
+    phoneViewModel: PhoneViewModel = hiltViewModel(),
+    phoneId: Int,
+    onClickBack: () -> Unit
+) {
+
+    LaunchedEffect(Unit) {
+        phoneViewModel.getPhoneById(phoneId)
+    }
+
+    val phoneUiState by phoneViewModel.phoneUiState
+
     Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
                     NavigationIconButton(onClick = onClickBack)
                 },
-                title = { Text(text = "") },
+                title = {
+
+                },
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Rounded.FavoriteBorder, contentDescription = null)
@@ -41,31 +63,14 @@ fun PhoneScreen(onClickBack: () -> Unit) {
             )
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues = it)
-        ) {
-            Surface (
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp),
-                color = DarkGray
-            ) {
+        if (phoneUiState.loading) Loading(paddingValues = it)
+        else {
+            if (phoneUiState.phone == null) {
+                ErrorFound(onClickRetry = { phoneViewModel.getPhoneById(phoneId) }, paddingValues = it)
+            } else {
 
             }
-
-            Surface (
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(all = 16.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = White
-            ) {
-
-            }
-
         }
+
     }
 }

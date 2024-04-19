@@ -26,8 +26,8 @@ fun PhonesSection(phonesUiState: PhonesUiState) {
         LazyRow (
         ) {
             item { Spacer(modifier = Modifier.width(16.dp)) }
-            items(phonesUiState.phones) {
-                PhoneCard(phones = it)
+            items(phonesUiState.phones!!) {
+                PhoneCard(phone = it)
                 Spacer(modifier = Modifier.width(16.dp))
             }
         }

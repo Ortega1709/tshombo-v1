@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.ortega.tshombo.AuthActivity
 import com.ortega.tshombo.NotificationActivity
 import com.ortega.tshombo.feature.favorite.presentation.screens.FavoriteScreen
 import com.ortega.tshombo.feature.home.presentation.screens.HomeScreen
@@ -28,6 +29,11 @@ fun MainNavigation(navController: NavHostController) {
                     val intent = Intent(context, NotificationActivity::class.java)
                     context.startActivity(intent)
                 },
+                onClickLogout = {
+                    val intent = Intent(context, AuthActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
+                }
             )
         }
         composable(route = MainScreens.FAVORITE.name) {
