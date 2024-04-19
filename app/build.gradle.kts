@@ -93,6 +93,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.6")
     implementation("androidx.compose.material:material-icons-extended")
 
+    implementation("com.google.accompanist:accompanist-pager:0.22.0-rc")
+
+
     implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.9.0")

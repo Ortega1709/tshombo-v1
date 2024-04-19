@@ -48,7 +48,6 @@ fun BodySection(
             ) {
                 item { Spacer(modifier = Modifier.height(16.dp)) }
                 items(promotionsUiState.promotions) {
-                    val link = AppSecret.IMAGE_ENDPOINT + it.image
 
                     Item(
                         overlineContent = { MText(text = it.store.name) },
@@ -57,7 +56,7 @@ fun BodySection(
                                 modifier = Modifier
                                     .size(70.dp, 70.dp)
                                     .clip(RoundedCornerShape(12.dp)),
-                                model = link,
+                                model = it.image,
                                 contentDescription = it.name,
                                 contentScale = ContentScale.Crop
                             )

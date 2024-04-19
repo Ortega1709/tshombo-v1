@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.ortega.tshombo.PhoneActivity
 import com.ortega.tshombo.core.common.components.MText
 import com.ortega.tshombo.core.secret.AppSecret
@@ -30,7 +31,6 @@ import com.ortega.tshombo.feature.home.domain.useCase.GetPhones
 fun PhoneCard(phone: PhoneEntity) {
 
     val context = LocalContext.current
-    val link = AppSecret.IMAGE_ENDPOINT + phone.image
 
     Column(
         modifier = Modifier
@@ -48,7 +48,10 @@ fun PhoneCard(phone: PhoneEntity) {
                 .width(200.dp)
                 .height(150.dp)
                 .clip(RoundedCornerShape(12.dp)),
-            model = link,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(phone.image)
+                .crossfade(true)
+                .build(),
             contentDescription = phone.brand,
             contentScale = ContentScale.Crop,
         )

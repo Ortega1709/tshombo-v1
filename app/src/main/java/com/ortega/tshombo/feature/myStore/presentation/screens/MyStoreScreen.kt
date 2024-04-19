@@ -41,6 +41,7 @@ import com.ortega.tshombo.feature.store.presentation.viewModel.StoreViewModel
 @Composable
 fun MyStoreScreen(myStoreViewModel: MyStoreViewModel = hiltViewModel()) {
     val myStoreUiState by myStoreViewModel.myStoreUiState
+    val myStorePhoneUiState by myStoreViewModel.myStorePhoneUiState
     val context = LocalContext.current
 
     Scaffold(
@@ -83,7 +84,8 @@ fun MyStoreScreen(myStoreViewModel: MyStoreViewModel = hiltViewModel()) {
                 BodySection(
                     paddingValues = it,
                     myStoreViewModel = myStoreViewModel,
-                    storeEntity = myStoreUiState.store!!
+                    storeEntity = myStoreUiState.store!!,
+                    phones = myStorePhoneUiState.phone
                 )
             }
         }

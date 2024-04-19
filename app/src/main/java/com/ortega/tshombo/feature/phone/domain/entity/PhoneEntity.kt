@@ -6,4 +6,5 @@ data class PhoneEntity(
     val description: String,
     val price: Double,
     val image: String,
+    val store: StoreEntity
 )

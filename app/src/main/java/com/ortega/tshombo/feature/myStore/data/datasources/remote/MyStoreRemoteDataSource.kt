@@ -7,9 +7,11 @@ import com.ortega.tshombo.feature.myStore.domain.request.PhoneRequest
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -23,6 +25,18 @@ interface MyStoreRemoteDataSource {
         @Path("storeId") storeId: Int,
         @Body phoneRequest: PhoneRequest
     ): Response<Res<PhoneEntity>>
+
+    @GET("{storeId}/phones")
+    suspend fun getPhonesByStoreId(@Path("storeId") storeId: Int): Response<Res<List<PhoneEntity>>>
+
+    @PUT("{storeId}/phones")
+    suspend fun updatePhoneById(
+        @Path("storeId") storeId: Int,
+        @Body phoneRequest: PhoneRequest
+    ): Response<Res<PhoneEntity>>
+
+    @DELETE("phones/{phoneId}")
+    suspend fun deletePhoneById(@Path("phoneId") phoneId: Int): Response<Res<PhoneEntity>>
 
     @Multipart
     @POST("storage/phones/{phoneId}/upload")

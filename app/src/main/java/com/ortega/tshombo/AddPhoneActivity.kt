@@ -17,6 +17,11 @@ class AddPhoneActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val storeId = intent.getIntExtra("storeId", 0)
+        val phoneId = intent.getIntExtra("phoneId", 0)
+        val image = intent.getStringExtra("image")
+        val brand = intent.getStringExtra("brand")
+        val description = intent.getStringExtra("description")
+        val price = intent.getDoubleExtra("price", 0.0)
 
         setContent {
             TshomboTheme {
@@ -24,7 +29,15 @@ class AddPhoneActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AddPhoneScreen(storeId = storeId, onClickBack = { finish() })
+                    AddPhoneScreen(
+                        storeId = storeId,
+                        image = image,
+                        brand = brand,
+                        description = description,
+                        price = price,
+                        phoneId = phoneId,
+                        onClickBack = { finish() },
+                    )
                 }
             }
         }

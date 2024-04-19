@@ -1,6 +1,5 @@
 package com.ortega.tshombo.core.navigation
 
-import android.app.Activity
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -8,9 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.ortega.tshombo.AdminActivity
-import com.ortega.tshombo.AuthActivity
 import com.ortega.tshombo.MainActivity
 import com.ortega.tshombo.feature.auth.presentation.screen.LoginScreen
 import com.ortega.tshombo.feature.auth.presentation.screen.RegisterScreen

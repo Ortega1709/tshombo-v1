@@ -13,6 +13,9 @@ interface HomeRemoteDataSource {
     suspend fun getAllPhones(): Response<Res<List<PhoneEntity>>>
     @GET("phones")
     suspend fun getAllPhonesByNews(): Response<Res<List<PhoneEntity>>>
+
+
+
     @GET("stores")
     suspend fun getAllStores(): Response<Res<List<StoreEntity>>>
 

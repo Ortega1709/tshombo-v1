@@ -58,15 +58,20 @@ import com.ortega.tshombo.feature.myStore.presentation.viewModel.MyStoreViewMode
 fun AddPhoneScreen(
     myStoreViewModel: MyStoreViewModel = hiltViewModel(),
     storeId: Int,
+    phoneId: Int,
+    brand: String?,
+    image: String?,
+    description: String?,
+    price: Double?,
     onClickBack: () -> Unit
 ) {
 
     val context = LocalContext.current
 
-    val brandField = remember { mutableStateOf("") }
-    val descriptionField = remember { mutableStateOf("") }
+    val brandField = remember { mutableStateOf(brand ?: "") }
+    val descriptionField = remember { mutableStateOf(description ?: "") }
     val imageField = remember { mutableStateOf<Uri?>(null) }
-    val priceField = remember { mutableStateOf("") }
+    val priceField = remember { mutableStateOf(price.toString()) }
     val loading = remember { mutableStateOf(false) }
 
     val stroke = Stroke(
@@ -91,32 +96,68 @@ fun AddPhoneScreen(
                 },
                 actions = {
                     MTextButton(
-                        text = stringResource(id = R.string.add),
+                        text = stringResource(
+                            id = if (phoneId == 0) R.string.add
+                            else
+                                R.string.modify
+                        ),
                         loading = loading.value,
                         onClick = {
-                            if (brandField.value.isNotEmpty() && descriptionField.value.isNotEmpty() && imageField.value != null && priceField.value.isNotEmpty()) {
-                                val phoneRequest = PhoneRequest(
-                                    brand = brandField.value,
-                                    description = descriptionField.value,
-                                    price = priceField.value.toDouble()
-                                )
+                            if (phoneId != 0) {
+                                if (brandField.value.isNotEmpty() && descriptionField.value.isNotEmpty() && priceField.value.isNotEmpty()) {
+                                    val phoneRequest = PhoneRequest(
+                                        phoneId = phoneId,
+                                        brand = brandField.value,
+                                        description = descriptionField.value,
+                                        price = priceField.value.toDouble(),
+                                        image = image!!
+                                    )
 
-                                myStoreViewModel.addPhone(
-                                    context = context,
-                                    uri = imageField.value!!,
-                                    storeId = storeId,
-                                    phoneRequest = phoneRequest,
-                                    loading = { loading.value = it },
-                                    onSuccess = {
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                                                Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        context.startActivity(intent)
-                                    },
-                                    onError = {
-                                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-                                    }
-                                )
+                                    myStoreViewModel.updatePhoneById(
+                                        storeId = storeId,
+                                        phoneRequest = phoneRequest,
+                                        onSuccess = {
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            context.startActivity(intent)
+                                        },
+                                        onError = {
+                                            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                                        },
+                                        loading = { loading.value = it }
+                                    )
+                                }
+
+
+                            } else {
+
+                                if (brandField.value.isNotEmpty() && descriptionField.value.isNotEmpty() && imageField.value != null && priceField.value.isNotEmpty()) {
+                                    val phoneRequest = PhoneRequest(
+                                        phoneId = null,
+                                        brand = brandField.value,
+                                        description = descriptionField.value,
+                                        price = priceField.value.toDouble(),
+                                        image = ""
+                                    )
+
+                                    myStoreViewModel.addPhone(
+                                        context = context,
+                                        uri = imageField.value!!,
+                                        storeId = storeId,
+                                        phoneRequest = phoneRequest,
+                                        loading = { loading.value = it },
+                                        onSuccess = {
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            context.startActivity(intent)
+                                        },
+                                        onError = {
+                                            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                                        }
+                                    )
+                                }
                             }
                         },
                     )

@@ -1,19 +1,22 @@
-package com.ortega.tshombo.feature.promotion.domain.useCase
+package com.ortega.tshombo.feature.myStore.domain.useCase
 
-import com.ortega.tshombo.feature.promotion.domain.entity.PromotionEntity
-import com.ortega.tshombo.feature.promotion.domain.repository.IPromotionRepository
+import com.ortega.tshombo.feature.myStore.domain.entity.PhoneEntity
+import com.ortega.tshombo.feature.myStore.domain.repository.IMyStoreRepository
+import com.ortega.tshombo.feature.phone.domain.repository.IPhoneRepository
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetPromotions @Inject constructor(private val iPromotionRepository: IPromotionRepository) {
+
+class GetPhonesByStore @Inject constructor(private val iMyStoreRepository: IMyStoreRepository) {
 
     suspend operator fun invoke(
-        onSuccess: (List<PromotionEntity>) -> Unit,
+        storeId: Int,
+        onSuccess: (List<PhoneEntity>) -> Unit,
         onError: (String) -> Unit
     ) {
         try {
-            val response = iPromotionRepository.getAllPromotions()
+            val response = iMyStoreRepository.getPhonesByStoreId(storeId)
             if (response.code() == 200) {
                 if (response.body() != null) {
                     onSuccess(response.body()!!.data)

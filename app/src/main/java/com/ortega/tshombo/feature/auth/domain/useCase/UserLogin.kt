@@ -1,11 +1,8 @@
 package com.ortega.tshombo.feature.auth.domain.useCase
 
-import android.util.Log
 import com.ortega.tshombo.core.utils.PreferencesManager
 import com.ortega.tshombo.feature.auth.domain.entity.UserEntity
 import com.ortega.tshombo.feature.auth.domain.repository.IAuthRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

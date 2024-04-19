@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ortega.tshombo.R
+import com.ortega.tshombo.core.common.components.Container
 import com.ortega.tshombo.core.common.components.MText
 import com.ortega.tshombo.core.theme.DarkGray
 import com.ortega.tshombo.core.theme.White
@@ -24,13 +25,7 @@ import com.ortega.tshombo.feature.myStore.domain.entity.StoreEntity
 
 @Composable
 fun InfoStore(storeEntity: StoreEntity) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(12.dp)),
-        color = White
-    ) {
-
+    Container {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,6 +47,5 @@ fun InfoStore(storeEntity: StoreEntity) {
 
             Spacer(modifier = Modifier.height(4.dp))
         }
-
     }
 }

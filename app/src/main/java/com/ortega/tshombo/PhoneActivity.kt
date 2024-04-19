@@ -24,7 +24,7 @@ class PhoneActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   // PhoneScreen(phoneId = phoneId, onClickBack = { finish() })
+                   PhoneScreen(phoneId = phoneId,  onClickBack = { finish() })
                 }
             }
         }

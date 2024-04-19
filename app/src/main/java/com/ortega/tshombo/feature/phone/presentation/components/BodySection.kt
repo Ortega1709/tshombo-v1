@@ -2,6 +2,7 @@ package com.ortega.tshombo.feature.phone.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,36 +17,43 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.ortega.tshombo.core.common.components.MapStore
+import com.ortega.tshombo.core.secret.AppSecret
 import com.ortega.tshombo.core.theme.DarkGray
+import com.ortega.tshombo.feature.myStore.domain.entity.LocationEntity
 import com.ortega.tshombo.feature.phone.domain.entity.PhoneEntity
 
 @Composable
 fun BodySection(paddingValues: PaddingValues, phone: PhoneEntity) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues = paddingValues)
             .verticalScroll(rememberScrollState())
     ) {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp),
-            color = DarkGray
-        ) {
-
-        }
-
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .padding(all = 16.dp)
-                .clip(RoundedCornerShape(12.dp)),
+                .height(250.dp),
             contentScale = ContentScale.Crop,
             contentDescription = phone.brand,
             model = phone.image,
         )
 
+        Spacer(modifier = Modifier.height(16.dp))
+        InfoPhone(phone = phone, onClickStore = {})
+
+        Spacer(modifier = Modifier.height(16.dp))
+        MapStore(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            locationEntity = LocationEntity(
+                locationId = phone.store.location.locationId,
+                lon = phone.store.location.lon,
+                lat = phone.store.location.lat
+            )
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }

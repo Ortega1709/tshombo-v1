@@ -8,11 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 
 @Composable
 fun NetworkImage(url: String, contentDescription: String?, width: Int, height: Int) {
-    val painter: Painter = rememberImagePainter(url)
+    val painter: Painter = rememberAsyncImagePainter(url)
     Image(
         painter = painter,
         contentDescription = contentDescription,

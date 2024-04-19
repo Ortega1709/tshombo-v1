@@ -12,5 +12,11 @@ interface IMyStoreRepository {
     suspend fun getStoreByUserId(userId: Int): Response<Res<StoreEntity>>
     suspend fun addPhone(storeId: Int, phoneRequest: PhoneRequest): Response<Res<PhoneEntity>>
     suspend fun uploadFilePhone(phoneId: Int, image: File): Response<Res<PhoneEntity>>
+    suspend fun getPhonesByStoreId(storeId: Int): Response<Res<List<PhoneEntity>>>
+    suspend fun deletePhoneById(phoneId: Int): Response<Res<PhoneEntity>>
+    suspend fun updatePhoneById(
+        storeId: Int,
+        phoneRequest: PhoneRequest
+    ): Response<Res<PhoneEntity>>
 
 }

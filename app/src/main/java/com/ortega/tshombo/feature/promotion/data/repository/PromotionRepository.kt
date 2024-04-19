@@ -1,16 +1,12 @@
 package com.ortega.tshombo.feature.promotion.data.repository
 
-import android.content.Context
-import android.net.Uri
 import com.ortega.tshombo.core.common.response.Res
 import com.ortega.tshombo.feature.promotion.data.datasources.remote.PromotionRemoteDataSource
 import com.ortega.tshombo.feature.promotion.domain.entity.PromotionEntity
 import com.ortega.tshombo.feature.promotion.domain.repository.IPromotionRepository
 import com.ortega.tshombo.feature.promotion.domain.request.PromotionRequest
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
 import java.io.File

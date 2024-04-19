@@ -31,4 +31,19 @@ class MyStoreRepository @Inject constructor(private val myStoreRemoteDataSource:
         val imagePart = MultipartBody.Part.createFormData("file", image.name, requestFile)
         return myStoreRemoteDataSource.uploadFilePhone(phoneId = phoneId, image = imagePart)
     }
+
+    override suspend fun getPhonesByStoreId(storeId: Int): Response<Res<List<PhoneEntity>>> {
+        return myStoreRemoteDataSource.getPhonesByStoreId(storeId)
+    }
+
+    override suspend fun deletePhoneById(phoneId: Int): Response<Res<PhoneEntity>> {
+        return myStoreRemoteDataSource.deletePhoneById(phoneId)
+    }
+
+    override suspend fun updatePhoneById(
+        storeId: Int,
+        phoneRequest: PhoneRequest
+    ): Response<Res<PhoneEntity>> {
+        return myStoreRemoteDataSource.updatePhoneById(storeId, phoneRequest)
+    }
 }

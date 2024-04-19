@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
@@ -24,11 +25,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.ortega.tshombo.R
+import com.ortega.tshombo.core.common.components.AutoSlidingCarousel
 import com.ortega.tshombo.core.common.components.Loading
 import com.ortega.tshombo.core.common.components.MText
 import com.ortega.tshombo.feature.auth.presentation.viewModel.AuthViewModel
@@ -40,7 +48,7 @@ import com.ortega.tshombo.feature.home.presentation.components.SeeMoreSection
 import com.ortega.tshombo.feature.home.presentation.components.StoresSection
 import com.ortega.tshombo.feature.home.presentation.viewModel.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class, ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel,
@@ -55,6 +63,7 @@ fun HomeScreen(
     val globalLoading by homeViewModel.globalLoading
 
     val pullRefreshState = rememberPullRefreshState(globalLoading, { homeViewModel.fetchAll() })
+    val images = listOf<String>("https://images.samsung.com/sg/smartphones/galaxy-s22/buy/S22_S22plus_Carousel_GroupKV_MO.jpg", "https://topsuccess.ng/public/uploads/all/9efSiFDIhj5QRcZruessyy7aigKbHYrpeiXHzMpC.png", "https://i.ytimg.com/vi/iy-8RtEpLIo/maxresdefault.jpg")
 
     Box(
         modifier = Modifier
@@ -104,7 +113,25 @@ fun HomeScreen(
                             .verticalScroll(rememberScrollState())
                             .padding(paddingValues = it)
                     ) {
-                        PromotionSection(images = listOf())
+                        //PromotionSection(images = listOf())
+                        AutoSlidingCarousel(
+                            itemsCount = images.size,
+                            itemContent = { image ->
+                                AsyncImage(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(images[image])
+                                        .crossfade(true)
+                                        .build(),
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .height(200.dp)
+                                        .padding(horizontal = 16.dp)
+                                        .clip(RoundedCornerShape(12.dp)),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop
+                                )
+                            },
+                        )
 
                         SeeMoreSection(
                             text = stringResource(R.string.recommanded),
@@ -112,9 +139,9 @@ fun HomeScreen(
 
                         PhonesSection(phonesUiState = phonesUiState)
 
-                        SeeMoreSection(text = stringResource(R.string.news), onClickMore = {})
-
-                        PhonesNewsSection(phonesNewsUiState = phonesNewsUiState)
+//                        SeeMoreSection(text = stringResource(R.string.news), onClickMore = {})
+//
+//                        PhonesNewsSection(phonesNewsUiState = phonesNewsUiState)
 
                         SeeMoreSection(text = stringResource(R.string.stores), onClickMore = {})
 

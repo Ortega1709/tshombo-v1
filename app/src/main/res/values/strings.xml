@@ -50,4 +50,6 @@
     <string name="brand">Marque</string>
     <string name="price">Prix</string>
     <string name="retry">Réessayer</string>
+    <string name="modify">Modifier</string>
+    <string name="my_phones">Mes téléphones</string>
 </resources>
