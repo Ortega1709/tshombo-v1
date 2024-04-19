@@ -4,7 +4,7 @@
 
 Cette application mobile, développée en Kotlin Jetpack Compose et consommant une API RESTful, permet de mettre en relation des clients avec des vendeurs de téléphones portables. Elle offre des fonctionnalités distinctes pour chaque type d'utilisateur :
 
-## Fonctionnalités
+## Fonctionnalités client
 
 - Visualisation des téléphones disponibles: Les clients peuvent parcourir une liste complète de téléphones disponibles à la vente, avec des filtres pour affiner la recherche par marque, modèle, prix et autres critères.
 - Recherche de téléphones spécifiques: Les clients peuvent utiliser une barre de recherche pour trouver des téléphones spécifiques en fonction de leur nom, modèle ou marque.
